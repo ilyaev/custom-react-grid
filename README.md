@@ -92,13 +92,13 @@ import { Grid, EditorType } from "./Grid";
 
 ## Props
 
-### `GridProps<T>`
+### `GridProps`
 
 - `data` - An array of data objects to be displayed in the grid.
 - `columns` - An array of column configurations.
 - `onCellUpdate` - A callback function that is called when a cell value is updated.
 
-### `ColumnConfig<T>`
+### `ColumnConfig`
 
 - `key` - The key of the data object to be displayed in the column.
 - `header` - The header text for the column.
@@ -221,3 +221,7 @@ You can customize these styles by modifying the `grid.css` file.
 ## Conclusion
 
 The `Grid` component is a powerful and flexible data grid for React applications. It supports custom renderers and editors, making it suitable for a wide range of use cases.
+
+## Demo
+
+You can view a live demo of the `Grid` component [here](https://pbartz.net/).
