@@ -2,27 +2,27 @@ import React, { useState, useRef, useEffect } from "react";
 import "./dropdown.css";
 
 interface Option {
-  value: string;
+  value: number;
   label: string;
 }
 
 interface MultiSelectDropdownProps {
   options: Option[];
-  onChange: (selectedValues: string[]) => void;
-  value?: string[];
+  onChange: (selectedValues: number[]) => void;
+  value?: number[];
   placeholder?: string;
-  renderer?: (value: string[], selected: boolean) => JSX.Element;
+  renderer?: (value: number[], selected: boolean) => JSX.Element;
 }
 
 const MultiSelectDropdown: React.FC<MultiSelectDropdownProps> = ({
   options,
   onChange,
   placeholder = "Select options...",
-  value = [],
+  value = [] as number[],
   renderer = undefined,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedValues, setSelectedValues] = useState<string[]>(value);
+  const [selectedValues, setSelectedValues] = useState<number[]>(value);
   const [searchInput, setSearchInput] = useState("");
   const dropdownRef = useRef<HTMLDivElement>(null);
 

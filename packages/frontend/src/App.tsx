@@ -86,19 +86,13 @@ function App() {
               <>
                 <MultiSelectDropdown
                   options={users.map((user) => {
-                    return { value: user.id + "", label: user.name };
+                    return { value: user.id, label: user.name };
                   })}
-                  onChange={(values) =>
-                    onChange(values.map((v) => parseInt(v)))
-                  }
-                  value={(values as string[]).map((v) => v + "")}
+                  onChange={onChange}
+                  value={values as number[]}
                   placeholder="Select users..."
                   renderer={(values, selected) => {
-                    return renderUsers(
-                      values.map((v) => parseInt(v)),
-                      users,
-                      selected
-                    );
+                    return renderUsers(values, users, selected);
                   }}
                 />
               </>

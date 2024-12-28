@@ -50,23 +50,27 @@ npm run dev
 
 Once the frontend server is running, open your browser and navigate to [http://localhost:5173/](http://localhost:5173/) to view the application.
 
-### Architecture Decisions
+## Demo
+
+You can view a live demo of the `Grid` component [here](https://pbartz.net/).
+
+## Architecture Decisions
 
 The project is structured as a monorepo using Lerna, with separate packages for the frontend and backend. The frontend is built with React, TypeScript, and Vite, while the backend uses Express and TypeScript. This separation allows for clear distinction and management of client and server code.
 
-#### Assumptions Made
+## Assumptions Made
 
 - The frontend and backend will be developed and run independently.
 - The backend will serve static files from the frontend's build directory in production.
 - The frontend will fetch user data from the backend API.
 
-#### Known Limitations or Trade-offs
+## Known Limitations or Trade-offs
 
 - The backend does not include authentication or authorization mechanisms.
 - The frontend does not handle large datasets efficiently.
 - The project relies on a fixed set of user images stored in the public directory.
 
-#### Future Improvement Suggestions
+## Future Improvement Suggestions
 
 - Implement authentication and authorization in the backend.
 - Optimize the frontend for handling larger datasets.
@@ -222,6 +226,43 @@ You can customize these styles by modifying the `grid.css` file.
 
 The `Grid` component is a powerful and flexible data grid for React applications. It supports custom renderers and editors, making it suitable for a wide range of use cases.
 
-## Demo
+# MultiSelectDropdown Component
 
-You can view a live demo of the `Grid` component [here](https://pbartz.net/).
+The `MultiSelectDropdown` component is a customizable multi-select dropdown component built with React. It allows users to select multiple options from a dropdown list.
+
+### Props
+
+- **`options`**: An array of objects representing the available options. Each option should have a `value` (number) and a `label` (string).
+- **`onChange`**: A function that is called when the selected values change. It receives the new array of selected values as an argument.
+- **`value`** (optional): An array of numbers representing the initially selected values.
+- **`placeholder`** (optional): A string to display when no options are selected. Defaults to `"Select options..."`.
+- **`renderer`** (optional): A custom renderer function for the selected values. It receives the selected values and a boolean indicating if option is selected.
+
+### Example Usage
+
+```tsx
+import React from "react";
+import MultiSelectDropdown from "./path/to/MultiSelectDropdown";
+
+const options = [
+  { value: 1, label: "Option 1" },
+  { value: 2, label: "Option 2" },
+  { value: 3, label: "Option 3" },
+];
+
+const App = () => {
+  const handleSelectionChange = (selectedValues: number[]) => {
+    console.log("Selected values:", selectedValues);
+  };
+
+  return (
+    <MultiSelectDropdown
+      options={options}
+      onChange={handleSelectionChange}
+      placeholder="Select your options"
+    />
+  );
+};
+
+export default App;
+```
