@@ -1,5 +1,5 @@
 import "./App.css";
-import { EXAMPLE_DATA_USERS } from "./const";
+import { API_BASE_URL, EXAMPLE_DATA_USERS } from "./const";
 import MultiSelectDropdown from "./Dropdown";
 import { EditorType, Grid } from "./Grid";
 import { useEffect, useMemo, useState } from "react";
@@ -26,11 +26,7 @@ function App() {
 
   const fetchUsers = useMemo(() => {
     return () => {
-      fetch(
-        document.location.href.indexOf("localhost") === -1
-          ? "api/users"
-          : "http://localhost:5001/api/users"
-      )
+      fetch(API_BASE_URL + "users")
         .then((response) => response.json())
         .then((data) => setUsers(data))
         .catch((error) => console.error("Error fetching users:", error));
@@ -83,19 +79,17 @@ function App() {
           },
           editor: (values, onChange) => {
             return (
-              <>
-                <MultiSelectDropdown
-                  options={users.map((user) => {
-                    return { value: user.id, label: user.name };
-                  })}
-                  onChange={onChange}
-                  value={values as number[]}
-                  placeholder="Select users..."
-                  renderer={(values, selected) => {
-                    return renderUsers(values, users, selected);
-                  }}
-                />
-              </>
+              <MultiSelectDropdown
+                options={users.map((user) => {
+                  return { value: user.id, label: user.name };
+                })}
+                onChange={onChange}
+                value={values as number[]}
+                placeholder="Select users..."
+                renderer={(values, selected) => {
+                  return renderUsers(values, users, selected);
+                }}
+              />
             );
           },
         },
@@ -104,23 +98,15 @@ function App() {
           header: "Tags",
           renderer: (tags) => {
             return (
-              <div>
+              <>
                 {(tags as string[]).map((tag) => {
                   return (
-                    <span
-                      key={tag}
-                      className="tag"
-                      style={{
-                        border: "1px solid black",
-                        padding: "2px",
-                        margin: "2px",
-                      }}
-                    >
+                    <span key={tag} className="renderer-tag">
                       {tag}
                     </span>
                   );
                 })}
-              </div>
+              </>
             );
           },
           editor: (tags, onChange, onCommit) => (
@@ -149,33 +135,20 @@ function App() {
 
 const renderUsers = (values: number[], users: User[], selected: boolean) => {
   return (
-    <div style={{ display: "flex" }}>
+    <div className={"renderer-users"}>
       {values.slice(0, 3).map((value) => {
         const user = users.find((user) => user.id === value);
         return user ? (
-          <div
-            key={`avatar${value}`}
-            style={{
-              display: "flex",
-              alignItems: "center",
-              marginRight: "10px",
-            }}
-          >
-            <img
-              width={25}
-              key={user.url}
-              src={user.url}
-              alt={user.name}
-              style={{ marginRight: "5px" }}
-            />
-            <span style={{ whiteSpace: "nowrap" }}>
+          <div key={`avatar${value}`} className={"renderer-user"}>
+            <img width={25} key={user.url} src={user.url} alt={user.name} />
+            <span>
               {user?.name} {selected ? "✔" : ""}
             </span>
           </div>
         ) : null;
       })}
       {values.length > 3 && (
-        <div style={{ display: "flex", alignItems: "center" }}>
+        <div className={"renderer-users-counter"}>
           <span>+{values.length - 3}</span>
         </div>
       )}

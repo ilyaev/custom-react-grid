@@ -72,3 +72,8 @@ export const EXAMPLE_DATA_USERS = [
     users: [19, 20],
   },
 ];
+
+export const API_BASE_URL =
+  document.location.href.indexOf("localhost") === -1
+    ? "api/"
+    : "http://localhost:5001/api/";

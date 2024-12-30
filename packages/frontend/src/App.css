@@ -1,0 +1,28 @@
+.renderer-tag {
+    border: 1px solid black;
+    padding: 2px;
+    margin: 2px;
+}
+
+.renderer-users {
+    display: flex;
+}
+
+.renderer-users-counter {
+    align-items: center;
+    display: flex;
+}
+
+.renderer-user {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+}
+
+.renderer-user img {
+    margin-right: 5px;
+}
+
+.renderer-user span {
+    white-space: nowrap;
+}
